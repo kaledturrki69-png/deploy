@@ -39,7 +39,7 @@ class Resume(models.Model):
     May be sourced from upload, LinkedIn, or other systems.
     """
     SOURCE_CHOICES = [
-        ("jek", "Jek"),
+        ("getajob", "getajob"),
         ("upload", "Upload"),
         ("linkedin", "LinkedIn"),
         ("other", "Other"),
@@ -54,7 +54,7 @@ class Resume(models.Model):
     json_data = models.JSONField(default=dict, blank=True)
     embedding = VectorField(dimensions=1536, null=True, blank=True, help_text="OpenAI text-embedding-3-small vector")
 
-    source = models.CharField(max_length=50, choices=SOURCE_CHOICES, default="jek")
+    source = models.CharField(max_length=50, choices=SOURCE_CHOICES, default="getajob")
 
     # company that sourced it (recruiter or ATS)
     company = models.ForeignKey(

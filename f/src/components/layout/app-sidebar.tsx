@@ -38,7 +38,6 @@ import {
 import {
   IconChevronRight,
   IconChevronsDown,
-  IconPhotoUp,
   IconHelp,
   IconFileText
 } from '@tabler/icons-react';
@@ -50,17 +49,7 @@ import { useNavItems } from '@/i18n/components/nav-items'; // ✅ use translated
 /*                              Company / Tenants                             */
 /* -------------------------------------------------------------------------- */
 
-export const company = {
-  name: 'Acme Inc',
-  logo: IconPhotoUp,
-  plan: 'Enterprise'
-};
 
-const tenants = [
-  { id: '1', name: 'Acme Inc' },
-  { id: '2', name: 'Beta Corp' },
-  { id: '3', name: 'Gamma Ltd' }
-];
 
 /* -------------------------------------------------------------------------- */
 /*                                 Sidebar                                    */
@@ -72,12 +61,6 @@ export default function AppSidebar() {
   const locale = pathname.split('/')[1] || 'en';
   const t = useTranslations('dashboard'); // ✅ namespace for sidebar UI text
   const navItems = useNavItems(); // ✅ localized navigation items
-
-  const handleSwitchTenant = () => {
-    // TODO: implement tenant switching
-  };
-
-  const activeTenant = tenants[0];
 
   const [, setProfile] = useState<{
     name?: string;
@@ -105,11 +88,7 @@ export default function AppSidebar() {
   return (
     <Sidebar collapsible='icon'>
       <SidebarHeader>
-        <OrgSwitcher
-          tenants={tenants}
-          defaultTenant={activeTenant}
-          onTenantSwitch={handleSwitchTenant}
-        />
+        <OrgSwitcher />
       </SidebarHeader>
 
       {/* -------------------------- Sidebar Main --------------------------- */}

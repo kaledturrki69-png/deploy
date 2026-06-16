@@ -219,49 +219,59 @@ DEPLOY_BRANCH = os.getenv("DEPLOY_BRANCH", "")
 DEPLOY_MESSAGE = os.getenv("DEPLOY_MESSAGE", "")
 
 
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "formatters": {
-#         "verbose": {
-#             "format": "{asctime} | {levelname:<8} | {name} | {message} | {pathname}:{lineno}",
-#             "style": "{",
-#         },
-#         "simple": {
-#             "format": "{levelname} {message}",
-#             "style": "{",
-#         },
-#     },
-#     "handlers": {
-#         "console": {
-#             "class": "logging.StreamHandler",
-#             "formatter": "verbose",
-#         },
-#         "file": {
-#             "class": "logging.FileHandler",
-#             "filename": BASE_DIR / "logs" / "django.log",
-#             "formatter": "verbose",
-#         },
-#     },
-#     "loggers": {
-#         # Catch all Django logs
-#         "django": {
-#             "handlers": ["console", "file"],
-#             "level": os.getenv("DJANGO_LOG_LEVEL", "DEBUG"),
-#             "propagate": True,
-#         },
-#         # Application logs (you can add more per app)
-#         "apps": {
-#             "handlers": ["console", "file"],
-#             "level": "DEBUG",
-#             "propagate": False,
-#         },
-#     },
-#     "root": {
-#         "handlers": ["console", "file"],
-#         "level": os.getenv("DJANGO_LOG_LEVEL", "DEBUG"),
-#     }
-# }
+
+LOGS_DIR = BASE_DIR / "logs"
+LOGS_DIR.mkdir(exist_ok=True)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{asctime} | {levelname:<8} | {name} | {message} | {pathname}:{lineno}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": BASE_DIR / "logs" / "django.log",
+            "maxBytes": 1024 * 1024 * 5,  # 5 MB
+            "backupCount": 3,
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": True,
+        },
+        "apps": {
+            "handlers": ["console", "file"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        },
+        "celery": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}
+
 
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
