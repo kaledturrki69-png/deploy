@@ -102,7 +102,7 @@ export function UploadModal({
     setIsUploading(true);
     try {
       const API_URL =
-        process.env.NEXT_PUBLIC_API_URL || 'https://brain.jekjob.com';
+        process.env.NEXT_PUBLIC_API_URL || 'https://brain.getajob.com';
       const formData = new FormData();
       uploadedFiles.forEach((file) => formData.append('files', file));
 

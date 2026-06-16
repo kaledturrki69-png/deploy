@@ -14,10 +14,10 @@ def ensure_superuser(email: str, password: str):
         print(f"✅ Superuser already exists: {email}")
 
 def run():
-    ensure_superuser("adnane.benyoussef@gmail.com", "jekjob@2025!;")
-    ensure_superuser("elhamad.ismail@gmail.com", "jekjob@2025!;")
-    ensure_superuser("trabelsi.ayoub1998@gmail.com", "jekjob@2025!;")
-    ensure_superuser("farhat.meh@gmail.com", "jekjob@2025!;")
+    ensure_superuser("adnane.benyoussef@gmail.com", "getajob@2025!;")
+    ensure_superuser("elhamad.ismail@gmail.com", "getajob@2025!;")
+    ensure_superuser("trabelsi.ayoub1998@gmail.com", "getajob@2025!;")
+    ensure_superuser("farhat.meh@gmail.com", "getajob@2025!;")
     
 if __name__ == "__main__":
     run()

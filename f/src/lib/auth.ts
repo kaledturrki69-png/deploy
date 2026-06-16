@@ -149,7 +149,7 @@ export const authOptions: NextAuthOptions = {
           // If token expires in less than 5 minutes, refresh it
           if (tokenPayload.exp - currentTime < 300) {
             const refreshResponse = await fetch(
-              `${process.env.NEXT_PUBLIC_API_URL || 'https://brain.jekjob.com'}/api/v1/auth/token/refresh/`,
+              `${process.env.NEXT_PUBLIC_API_URL || 'https://brain.getajob.com'}/api/v1/auth/token/refresh/`,
               {
                 method: 'POST',
                 headers: {

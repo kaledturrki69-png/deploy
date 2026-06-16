@@ -8,7 +8,8 @@ import fitz  # PyMuPDF
 from .models import Document
 from apps.candidates.models import Candidate, Resume
 from apps.openaiapp.utils import extract_resume_json, DEFAULT_SCHEMA_VERSION
-from apps.openaiapp.services.CandidateProfile import CandidateProfile  # ✅ your Pydantic model
+from apps.openaiapp.services.CandidateProfile import CandidateProfile
+from apps.openaiapp.services.embedding_utils import get_embedding
 
 
 def extract_text_from_file(file_path: Path) -> str:
@@ -77,15 +78,34 @@ def process_document(self, document_id: int):
                 },
             )
 
-            # always create a new resume linked to candidate
-            Resume.objects.create(
+            resume = Resume.objects.create(
                 candidate=candidate,
                 company=doc.company,
                 source=doc.source,
                 document=doc,
                 schema_version=DEFAULT_SCHEMA_VERSION,
-                json_data=parsed.model_dump(mode="json"),  # ✅ ensure serializable JSON
+                json_data=parsed.model_dump(mode="json"),
             )
+
+            # -------------------- 5️⃣ Generate & store embedding --------------------
+            try:
+                resume_text_for_embedding = " ".join([
+                    parsed.name or "",
+                    " ".join(getattr(parsed, "skills", []) or []),
+                    " ".join(
+                        str(exp) for exp in (getattr(parsed, "experience", []) or [])
+                    ),
+                    getattr(parsed, "summary", "") or "",
+                ]).strip()
+                if resume_text_for_embedding:
+                    embedding = get_embedding(resume_text_for_embedding)
+                    if embedding:
+                        resume.embedding = embedding
+                        resume.save(update_fields=["embedding"])
+            except Exception as embed_err:
+                # Non-fatal: embedding failure doesn't block the upload
+                import logging
+                logging.getLogger(__name__).warning(f"Embedding failed for resume {resume.id}: {embed_err}")
 
             doc.candidate = candidate
             doc.processing_progress = 100

@@ -149,7 +149,7 @@ export default function ReleasesPage() {
             <div className='bg-primary flex h-12 w-12 items-center justify-center rounded-lg'>
               <Image
                 src='/assets/logo.png'
-                alt='JekJob Logo'
+                alt='getajob Logo'
                 width={24}
                 height={24}
                 className='text-primary-foreground'
@@ -157,7 +157,7 @@ export default function ReleasesPage() {
             </div>
             <div>
               <Heading
-                title='JekJob Releases'
+                title='getajob Releases'
                 description='Track all changes and improvements made to the platform'
               />
             </div>
@@ -221,11 +221,11 @@ export default function ReleasesPage() {
           <div className='mb-1 flex items-center space-x-2'>
             <Image
               src='/assets/logo.png'
-              alt='JekJob Logo'
+              alt='getajob Logo'
               width={16}
               height={16}
             />
-            <span>JekJob Platform</span>
+            <span>getajob Platform</span>
           </div>
 
           {/* 🧾 Deploy info */}

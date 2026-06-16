@@ -24,7 +24,7 @@ export default function HelpPage() {
   const helpSections = [
     {
       title: 'Getting Started',
-      description: 'Learn how to use JekJob platform effectively',
+      description: 'Learn how to use getajob platform effectively',
       items: [
         {
           question: 'How do I upload my CV?',
@@ -92,8 +92,8 @@ export default function HelpPage() {
       icon: IconMail,
       title: 'Email Support',
       description: 'Get help via email',
-      contact: 'support@jekjob.com',
-      action: 'mailto:support@jekjob.com'
+      contact: 'support@getajob.com',
+      action: 'mailto:support@getajob.com'
     },
     {
       icon: IconPhone,
@@ -204,7 +204,7 @@ export default function HelpPage() {
             <div className='text-muted-foreground flex items-center space-x-2 text-sm'>
               <Image
                 src='/assets/logo.png'
-                alt='JekJob Logo'
+                alt='getajob Logo'
                 width={16}
                 height={16}
               />

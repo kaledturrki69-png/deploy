@@ -10,13 +10,13 @@ from .serializers import (
 )
 
 
-def get_jekjob_company():
-    """Return the JekJob library company."""
-    return Company.objects.filter(slug="jekjob").first()
+def get_getajob_company():
+    """Return the getajob library company."""
+    return Company.objects.filter(slug="getajob").first()
 
 
 class CompanyScopedViewSetMixin:
-    """Filters by authenticated user's company + optionally includes JekJob library."""
+    """Filters by authenticated user's company + optionally includes getajob library."""
 
     def get_queryset(self):
         user = self.request.user
@@ -25,10 +25,10 @@ class CompanyScopedViewSetMixin:
         company = getattr(user, "company", None)
         if not company:
             return self.queryset.none()
-        jekjob = get_jekjob_company()
+        getajob = get_getajob_company()
         filters = Q(company=company)
-        if getattr(company, "view_library", False) and jekjob:
-            filters |= Q(company=jekjob)
+        if getattr(company, "view_library", False) and getajob:
+            filters |= Q(company=getajob)
         return self.queryset.filter(filters).distinct()
 
     def perform_create(self, serializer):
@@ -36,7 +36,7 @@ class CompanyScopedViewSetMixin:
         serializer.save(user=user, company=user.company)
 
 
-# --- PositionCategory (read for all, write for JekJob only) ---
+# --- PositionCategory (read for all, write for getajob only) ---
 
 class PositionCategoryViewSet(viewsets.ModelViewSet):
     queryset = PositionCategory.objects.all()
@@ -47,9 +47,9 @@ class PositionCategoryViewSet(viewsets.ModelViewSet):
         super().check_permissions(request)
         if request.method in permissions.SAFE_METHODS:
             return
-        jekjob = get_jekjob_company()
-        if getattr(request.user, "company", None) != jekjob:
-            raise PermissionDenied("Only JekJob users can modify categories.")
+        getajob = get_getajob_company()
+        if getattr(request.user, "company", None) != getajob:
+            raise PermissionDenied("Only getajob users can modify categories.")
 
 
 # --- CRUD ---
@@ -83,10 +83,10 @@ class PositionViewSet(CompanyScopedViewSetMixin, viewsets.ModelViewSet):
         return position
 
     def clone_from_template(self, position, template_id, company):
-        jekjob = get_jekjob_company()
+        getajob = get_getajob_company()
         base = Position.objects.filter(
             Q(id=template_id, is_library=True)
-            & (Q(company=company) | (Q(company=jekjob) if getattr(company, "view_library", False) else Q()))
+            & (Q(company=company) | (Q(company=getajob) if getattr(company, "view_library", False) else Q()))
         ).first()
         if not base:
             return
@@ -130,10 +130,10 @@ class PositionLibraryView(generics.ListAPIView):
         company = getattr(user, "company", None)
         if not company:
             return Position.objects.none()
-        jekjob = get_jekjob_company()
+        getajob = get_getajob_company()
         filters = Q(company=company, is_library=True)
-        if getattr(company, "view_library", False) and jekjob:
-            filters |= Q(company=jekjob, is_library=True)
+        if getattr(company, "view_library", False) and getajob:
+            filters |= Q(company=getajob, is_library=True)
         qs = Position.objects.filter(filters).select_related("category").only(
             "id", "name", "description", "company_id", "is_library", "category"
         )

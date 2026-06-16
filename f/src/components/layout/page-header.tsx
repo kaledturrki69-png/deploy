@@ -23,7 +23,7 @@ export function PageHeader({
         <div className='bg-primary/10 flex h-12 w-12 items-center justify-center rounded-lg'>
           <Image
             src='/assets/logo.png'
-            alt='JekJob Logo'
+            alt='getajob Logo'
             width={32}
             height={32}
             className='h-8 w-8'

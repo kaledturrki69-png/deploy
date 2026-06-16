@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/auth';
 
 // Proxy to remote server API
 const REMOTE_API_BASE =
-  process.env.NEXT_PUBLIC_API_URL || 'https://brain.jekjob.com';
+  process.env.NEXT_PUBLIC_API_URL || 'https://brain.getajob.com';
 
 // GET /api/documents/[id]/download
 export async function GET(

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import {
   Card,
   CardHeader,
@@ -25,14 +26,28 @@ interface ActiveStats {
 }
 
 export function ActiveCandidatesCard() {
-  // 🧩 Static mock data (replace with API later)
-  const data: ActiveStats = {
-    active_week: 128,
-    previous_week: 115,
-    total_users: 1450,
-    trend: 'up',
-    percent_change: ((128 - 115) / 115) * 100
-  };
+  const [data, setData] = useState<ActiveStats | null>(null);
+
+  useEffect(() => {
+    fetch('/api/dashboard/active-candidates')
+      .then((res) => res.json())
+      .then((json) => setData(json))
+      .catch(() => {
+        // Fallback to zeros on error
+        setData({ active_week: 0, previous_week: 0, total_users: 0, trend: 'up', percent_change: 0 });
+      });
+  }, []);
+
+  if (!data) {
+    return (
+      <Card className='@container/card animate-pulse'>
+        <CardHeader>
+          <CardDescription>Active Candidates (Apps)</CardDescription>
+          <CardTitle className='text-2xl font-semibold tabular-nums'>—</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+  }
 
   const { active_week, percent_change, trend, total_users } = data;
   const TrendIcon = trend === 'up' ? IconTrendingUp : IconTrendingDown;

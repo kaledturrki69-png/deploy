@@ -9,8 +9,8 @@ import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'Dashboard | JekJob',
-  description: 'JekJob Dashboard'
+  title: 'Dashboard | getajob',
+  description: 'getajob Dashboard'
 };
 
 export default async function DashboardLayout({

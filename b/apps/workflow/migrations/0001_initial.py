@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('accounts', '0003_company_access_jekjob_resumes_workplace'),
+        ('accounts', '0003_company_access_getajob_resumes_workplace'),
         ('positions', '0002_position_embedding_position_embedding_status_and_more'),
     ]
 

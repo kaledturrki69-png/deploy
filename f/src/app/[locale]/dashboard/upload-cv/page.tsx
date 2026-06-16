@@ -4,7 +4,7 @@ import { SearchParams } from 'nuqs/server';
 import { PageWrapper } from './page-wrapper';
 
 export const metadata = {
-  title: 'Upload CV | JekJob',
+  title: 'Upload CV | getajob',
   description: 'Upload and manage CV documents'
 };
 

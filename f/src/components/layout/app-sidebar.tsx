@@ -196,7 +196,7 @@ export default function AppSidebar() {
                   <div className='flex flex-col gap-0.5 leading-none'>
                     <span className='font-semibold'>{t('about')}</span>
                     <span className='text-muted-foreground text-xs'>
-                      JekJob
+                      getajob
                     </span>
                   </div>
                   <IconChevronsDown className='ml-auto size-4' />
@@ -219,7 +219,7 @@ export default function AppSidebar() {
                           {t('about')}
                         </span>
                         <span className='text-muted-foreground text-xs'>
-                          JekJob
+                          getajob
                         </span>
                       </div>
                     </div>

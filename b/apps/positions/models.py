@@ -12,7 +12,7 @@ def get_default_user():
 
 
 class PositionCategory(models.Model):
-    """Publicly readable category, writable only by JekJob users."""
+    """Publicly readable category, writable only by getajob users."""
     name = models.CharField(max_length=255, unique=True, verbose_name=_("Name"))
     description = models.TextField(blank=True, verbose_name=_("Description"))
 
@@ -26,7 +26,7 @@ class PositionCategory(models.Model):
 
 
 class Skill(models.Model):
-    """Professional or behavioral skill (owned by company or from JekJob library)."""
+    """Professional or behavioral skill (owned by company or from getajob library)."""
 
     class SkillType(models.TextChoices):
         HARD = "hard", _("Hard Skill")
@@ -49,7 +49,7 @@ class Skill(models.Model):
 
 
 class Condition(models.Model):
-    """Candidate requirement condition (owned by company or from JekJob library)."""
+    """Candidate requirement condition (owned by company or from getajob library)."""
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="conditions")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, default=get_default_user)
     name = models.CharField(max_length=255)
@@ -67,7 +67,7 @@ class Condition(models.Model):
 
 
 class Position(models.Model):
-    """Job position owned by a company or provided by JekJob as library."""
+    """Job position owned by a company or provided by getajob as library."""
 
     class Status(models.TextChoices):
         OPEN = "open", _("Open")

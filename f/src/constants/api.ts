@@ -4,7 +4,7 @@
  */
 
 export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'https://brain.jekjob.com';
+  process.env.NEXT_PUBLIC_API_URL || 'https://brain.getajob.com';
 
 const API_V1_BASE = '/api/v1';
 
@@ -88,7 +88,7 @@ export const API_ENDPOINTS = {
   DASHBOARD_TOP_MATCHES: `${API_V1_BASE}/dashboard/top-matches/`,
   DASHBOARD_POSITIONS_MATCHING: `${API_V1_BASE}/dashboard/positions-matching/`,
   DASHBOARD_CANDIDATES_TREND: `${API_V1_BASE}/dashboard/candidates-trend/`,
-  DASHBOARD_JEKJOB_CANDIDATES_TREND: `${API_V1_BASE}/dashboard/jekjob-candidates-trend/`,
+  DASHBOARD_GETAJOB_CANDIDATES_TREND: `${API_V1_BASE}/dashboard/getajob-candidates-trend/`,
 
   // Quiz (Public Assessment)
   QUIZ_GENERATE: `${API_V1_BASE}/assessment/public/generate_quiz/`,

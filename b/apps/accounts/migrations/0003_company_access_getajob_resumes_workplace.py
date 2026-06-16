@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='company',
-            name='access_jekjob_resumes',
+            name='access_getajob_resumes',
             field=models.BooleanField(default=True),
         ),
         migrations.CreateModel(

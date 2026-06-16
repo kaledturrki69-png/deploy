@@ -16,7 +16,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 interface MatchingStats {
   total_positions: number;
   company_matches: number;
-  jekjob_matches: number;
+  getajob_matches: number;
 }
 
 export function PositionsMatchingCard() {
@@ -56,8 +56,8 @@ export function PositionsMatchingCard() {
 
   if (!data) return null;
 
-  const { total_positions, company_matches, jekjob_matches } = data;
-  const total_matches = company_matches + jekjob_matches;
+  const { total_positions, company_matches, getajob_matches } = data;
+  const total_matches = company_matches + getajob_matches;
 
   return (
     <Card className='@container/card'>
@@ -80,8 +80,8 @@ export function PositionsMatchingCard() {
           <span className='font-semibold'>{company_matches}</span>
         </div>
         <div className='flex gap-2 font-medium text-indigo-600'>
-          JekJob candidates:{' '}
-          <span className='font-semibold'>{jekjob_matches}</span>
+          getajob candidates:{' '}
+          <span className='font-semibold'>{getajob_matches}</span>
         </div>
         <div className='text-muted-foreground'>
           Matching profiles across active positions

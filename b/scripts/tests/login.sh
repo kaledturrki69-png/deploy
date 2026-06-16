@@ -1,4 +1,4 @@
-BASE="https://brain.jekjob.com/api/v1"
+BASE="https://brain.getajob.com/api/v1"
 EMAIL="adnane.benyoussef@gmail.com"
 PASS="raniaber"
 

@@ -21,14 +21,14 @@ interface TrendData {
   trend: 'up' | 'down';
 }
 
-export function JekjobCandidatesTrendCard() {
+export function GetajobCandidatesTrendCard() {
   const [data, setData] = useState<TrendData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch('/api/dashboard/jekjob-candidates-trend');
+        const res = await fetch('/api/dashboard/getajob-candidates-trend');
         if (!res.ok) throw new Error('Failed to fetch');
         const d = await res.json();
         setData(d);
@@ -45,7 +45,7 @@ export function JekjobCandidatesTrendCard() {
     return (
       <Card className='@container/card'>
         <CardHeader>
-          <CardDescription>JekJob Candidates</CardDescription>
+          <CardDescription>getajob Candidates</CardDescription>
           <Skeleton className='h-8 w-[120px]' />
         </CardHeader>
         <CardFooter className='text-muted-foreground text-sm'>
@@ -63,7 +63,7 @@ export function JekjobCandidatesTrendCard() {
   return (
     <Card className='@container/card'>
       <CardHeader>
-        <CardDescription>JekJob platform candidates this week</CardDescription>
+        <CardDescription>getajob platform candidates this week</CardDescription>
         <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
           {current_week}
         </CardTitle>
@@ -88,7 +88,7 @@ export function JekjobCandidatesTrendCard() {
           <TrendIcon className='size-4' />
         </div>
         <div className='text-muted-foreground'>
-          Candidates created on the JekJob platform
+          Candidates created on the getajob platform
         </div>
       </CardFooter>
     </Card>

@@ -218,10 +218,10 @@ src/app/[locale]/dashboard/skills/page.tsx
   src/app/[locale]/dashboard/skills/page.tsx:138: Prop "placeholder": Description
 
 src/app/[locale]/dashboard/releases/page.tsx
-  src/app/[locale]/dashboard/releases/page.tsx:152: Prop "alt": JekJob Logo
-  src/app/[locale]/dashboard/releases/page.tsx:160: Prop "title": JekJob Releases
+  src/app/[locale]/dashboard/releases/page.tsx:152: Prop "alt": getajob Logo
+  src/app/[locale]/dashboard/releases/page.tsx:160: Prop "title": getajob Releases
   src/app/[locale]/dashboard/releases/page.tsx:161: Prop "description": Track all changes and improvements made to the platform
-  src/app/[locale]/dashboard/releases/page.tsx:224: Prop "alt": JekJob Logo
+  src/app/[locale]/dashboard/releases/page.tsx:224: Prop "alt": getajob Logo
 
 src/app/[locale]/dashboard/recruting/page.tsx
   src/app/[locale]/dashboard/recruting/page.tsx:422: Prop "placeholder": Type and select a position...
@@ -248,7 +248,7 @@ src/app/[locale]/dashboard/help/page.tsx
   src/app/[locale]/dashboard/help/page.tsx:122: Prop "alt": Logo
   src/app/[locale]/dashboard/help/page.tsx:129: Prop "title": Help Center
   src/app/[locale]/dashboard/help/page.tsx:130: Prop "description": Find answers to common questions and get support
-  src/app/[locale]/dashboard/help/page.tsx:207: Prop "alt": JekJob Logo
+  src/app/[locale]/dashboard/help/page.tsx:207: Prop "alt": getajob Logo
 
 src/app/[locale]/dashboard/hard-skills/page.tsx
   src/app/[locale]/dashboard/hard-skills/page.tsx:310: Prop "placeholder": Nom de skill

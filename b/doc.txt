@@ -10,6 +10,6 @@ swagger
 admin django
 - http://localhost:8001/admin/
 
-login: admin1@jekjob.com
-password: jekjob@2025!;
+login: admin1@getajob.com
+password: getajob@2025!;
 

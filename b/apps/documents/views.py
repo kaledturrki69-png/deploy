@@ -68,11 +68,8 @@ class DocumentViewSet(viewsets.ModelViewSet):
         Upload one or more files, set metadata (source, doc_type, company, uploaded_by),
         and start background processing.
         """
-        print('************e*************')
         user = request.user
         files = request.FILES.getlist("files")
-        print('***********w************')
-        print(request)
 
         if not files:
             return Response({"detail": "No files provided.s"}, status=400)

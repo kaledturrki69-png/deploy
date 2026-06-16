@@ -2,7 +2,7 @@
 
 import PageContainer from '@/components/layout/page-container';
 import { CandidatesTrendCard } from '@/features/overview/components/candidates-trend';
-import { JekjobCandidatesTrendCard } from '@/features/overview/components/jekjob-candidates-trend';
+import { GetajobCandidatesTrendCard } from '@/features/overview/components/getajob-candidates-trend';
 import { PositionsMatchingCard } from '@/features/overview/components/matching-position';
 import { ActiveCandidatesCard } from '@/features/overview/components/active-users';
 import React from 'react';
@@ -32,7 +32,7 @@ export default function OverViewLayout({
 
         <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
           <CandidatesTrendCard />
-          <JekjobCandidatesTrendCard />
+          <GetajobCandidatesTrendCard />
           <PositionsMatchingCard />
           <ActiveCandidatesCard />
         </div>

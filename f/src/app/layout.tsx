@@ -17,11 +17,11 @@ const META_THEME_COLORS = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'JekJob',
-    template: '%s | JekJob'
+    default: 'getajob',
+    template: '%s | getajob'
   },
   description:
-    'JekJob - A new way of hiring, a new way for finding your next job',
+    'getajob - A new way of hiring, a new way for finding your next job',
   icons: {
     icon: '/assets/logo.png',
     shortcut: '/assets/logo.png',

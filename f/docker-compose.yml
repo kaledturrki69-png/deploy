@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    container_name: jekjob_eyes_web
+    container_name: getajob_eyes_web
     env_file: .env
     restart: always
     ports:

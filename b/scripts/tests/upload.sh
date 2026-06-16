@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # ======= CONFIGURATION =======
-BASE="https://brain.jekjob.com/api/v1"       # adjust if needed
+BASE="https://brain.getajob.com/api/v1"       # adjust if needed
 DOCS_ENDPOINT="$BASE/documents/"
 FILES_DIR="./files"
 TOKEN_FILE="token.txt"

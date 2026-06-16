@@ -58,7 +58,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         role = validated_data.get("role")
         company = validated_data.get("company")
         company_name = (
-            "jekjob" if role == "employer" else "jenijob"
+            "getajob" if role == "employer" else "jenijob"
         )
         company, _ = Company.objects.get_or_create(name=company_name)
         user = User.objects.create_user(

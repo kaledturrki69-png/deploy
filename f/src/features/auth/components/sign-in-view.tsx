@@ -54,7 +54,7 @@ export default function SignInViewPage() {
             height={200}
             className='mb-4'
           />
-          Jekjob, a new way of hiring, an new way for finding your next job!
+          getajob, a new way of hiring, an new way for finding your next job!
         </div>
         {/* <div className='relative z-20 mt-auto'>
           <blockquote className='space-y-2'>

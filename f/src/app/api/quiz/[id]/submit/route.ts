@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
 const REMOTE_API_BASE =
-  process.env.NEXT_PUBLIC_API_URL || 'https://brain.jekjob.com';
+  process.env.NEXT_PUBLIC_API_URL || 'https://brain.getajob.com';
 
 // POST /api/quiz/[id]/submit - Submit quiz answers
 export async function POST(

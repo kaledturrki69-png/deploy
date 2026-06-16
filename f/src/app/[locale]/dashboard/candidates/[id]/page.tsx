@@ -99,7 +99,7 @@ export default function CandidateDetailPage() {
       }
       // If it's a relative path, prepend API base URL
       const API_BASE_URL =
-        process.env.NEXT_PUBLIC_API_URL || 'https://brain.jekjob.com';
+        process.env.NEXT_PUBLIC_API_URL || 'https://brain.getajob.com';
       return `${API_BASE_URL}${photo.startsWith('/') ? '' : '/'}${photo}`;
     }
 

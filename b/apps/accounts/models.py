@@ -9,7 +9,7 @@ class Company(models.Model):
     name = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(max_length=160, unique=True, blank=True)
     view_library = models.BooleanField(default=True)
-    access_jekjob_resumes = models.BooleanField(default=True)
+    access_getajob_resumes = models.BooleanField(default=True)
 
 
     created_at = models.DateTimeField(default=timezone.now)
@@ -41,7 +41,7 @@ class JekUserManager(BaseUserManager):
         extra_fields.setdefault("role", "superadmin")
 
         user = self.create_user(email, password, **extra_fields)
-        company, _ = Company.objects.get_or_create(name="jekjob")
+        company, _ = Company.objects.get_or_create(name="getajob")
         user.company = company
         user.save(using=self._db)
         return user

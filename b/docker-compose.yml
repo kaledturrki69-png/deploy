@@ -1,7 +1,7 @@
 services:
   web:
-    container_name: jekjob-brain
-    hostname: jekjob-brain
+    container_name: getajob-brain
+    hostname: getajob-brain
     build: .
     env_file: .env
     command: >
@@ -23,7 +23,7 @@ services:
       DJANGO_MEDIA_ROOT: /code/media      # ★ ensure the path
 
   worker:
-    container_name: jekjob-brain-worker
+    container_name: getajob-brain-worker
     build: .
     env_file: .env
     command: >
@@ -38,7 +38,7 @@ services:
       DJANGO_MEDIA_ROOT: /code/media      # ★ ensure the path
 
   beat:
-    container_name: jekjob-brain-beat
+    container_name: getajob-brain-beat
     build: .
     env_file: .env
     command: >
@@ -53,23 +53,23 @@ services:
       DJANGO_MEDIA_ROOT: /code/media      # ★ ensure the path
 
   db:
-    container_name: jekjob-brain-db
+    container_name: getajob-brain-db
     image: pgvector/pgvector:0.8.1-pg16-trixie
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes: ["jekjob_pgdata:/var/lib/postgresql/data"]
+    volumes: ["getajob_pgdata:/var/lib/postgresql/data"]
     networks: [webserver_default]
     ports: ["5439:5432"]
 
   redis:
-    container_name: jekjob-brain-redis
+    container_name: getajob-brain-redis
     image: redis:7
     networks: [webserver_default]
 
 volumes:
-  jekjob_pgdata:
+  getajob_pgdata:
 
 networks:
   webserver_default:

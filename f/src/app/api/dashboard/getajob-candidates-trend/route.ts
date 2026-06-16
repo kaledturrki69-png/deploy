@@ -11,7 +11,7 @@ export async function GET() {
     const session = await requireAuth();
 
     const response = await fetchFromRemote(
-      '/api/v1/dashboard/jekjob-candidates-trend/',
+      '/api/v1/dashboard/getajob-candidates-trend/',
       session.accessToken,
       {
         cache: 'no-store'

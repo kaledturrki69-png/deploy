@@ -30,11 +30,11 @@ deploy:
     - mkdir -p ~/.ssh
     - echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
     - chmod 600 ~/.ssh/id_ed25519
-    - ssh-keyscan -H jekjob.com >> ~/.ssh/known_hosts
+    - ssh-keyscan -H getajob.com >> ~/.ssh/known_hosts
   script:
     - |
-      ssh webdev@jekjob.com<< 'EOF'
-      cd ~/production/projects/jekjob3/brain
+      ssh webdev@getajob.com<< 'EOF'
+      cd ~/production/projects/getajob3/brain
 
       echo "📦 Pulling latest image"
       docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"

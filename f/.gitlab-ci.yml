@@ -34,7 +34,7 @@ deploy:
     - mkdir -p ~/.ssh
     - echo "$DEPLOY_SSH_KEY2" > ~/.ssh/id_ed25519
     - chmod 600 ~/.ssh/id_ed25519
-    - ssh-keyscan -H jekjob.com >> ~/.ssh/known_hosts
+    - ssh-keyscan -H getajob.com >> ~/.ssh/known_hosts
   script:
     - |
       echo "🔧 Preparing deploy metadata"
@@ -45,9 +45,9 @@ deploy:
       DEPLOY_MESSAGE="$(echo "$CI_COMMIT_TITLE" | tr -d '\n')"
 
       echo "🚀 Connecting to Hetzner and deploying"
-      ssh webdev@jekjob.com <<EOF
+      ssh webdev@getajob.com <<EOF
       set -e
-      cd ~/production/projects/jekjob3/eyes
+      cd ~/production/projects/getajob3/eyes
 
       echo "📦 Pulling latest image"
       echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"

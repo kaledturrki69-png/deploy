@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { logger } from '@/lib/logger';
 
 const REMOTE_API_BASE =
-  process.env.NEXT_PUBLIC_API_URL || 'https://brain.jekjob.com';
+  process.env.NEXT_PUBLIC_API_URL || 'https://brain.getajob.com';
 
 export async function POST(
   request: NextRequest,
