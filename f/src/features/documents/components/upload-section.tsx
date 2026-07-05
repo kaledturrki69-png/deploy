@@ -77,7 +77,7 @@ export function UploadSection() {
       const formData = new FormData();
       uploadedFiles.forEach((file) => formData.append('files', file));
 
-      const response = await fetch(`${API_URL}/api/v1/documents/`, {
+      const response = await fetch(`${API_URL}/api/v1/documents/documents/`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${session.accessToken}` },
         body: formData
@@ -215,31 +215,33 @@ export function UploadSection() {
             </div>
           )}
 
-          {/* Action Buttons */}
-          <div className='flex justify-end space-x-3 pt-4'>
-            <Button
-              variant='outline'
-              onClick={() => router.push(`/${locale}/dashboard/upload-cv`)}
-              disabled={isUploading}
-            >
-              {t('cancel')}
-            </Button>
-            <Button
-              onClick={handleUpload}
-              disabled={!uploadedFiles.length || isUploading}
-              size='lg'
-            >
-              {isUploading
-                ? t('uploading')
-                : uploadedFiles.length > 0
-                  ? uploadedFiles.length === 1
-                    ? t('upload_files', { count: uploadedFiles.length })
-                    : t('upload_files_plural', { count: uploadedFiles.length })
-                  : t('upload')}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
     </div>
+
+    {/* Sticky action buttons - always visible */}
+    <div className='fixed bottom-0 left-0 right-0 z-50 border-t bg-white p-4 shadow-lg md:relative md:border-0 md:bg-transparent md:p-0 md:shadow-none'>
+      <div className='flex justify-end space-x-3'>
+        <Button
+          variant='outline'
+          onClick={() => router.push(`/${locale}/dashboard/upload-cv`)}
+          disabled={isUploading}
+        >
+          {t('cancel')}
+        </Button>
+        <Button
+          onClick={handleUpload}
+          disabled={!uploadedFiles.length || isUploading}
+          size='lg'
+        >
+          {isUploading
+            ? t('uploading')
+            : uploadedFiles.length > 0
+              ? uploadedFiles.length === 1
+                ? t('upload_files', { count: uploadedFiles.length })
+                : t('upload_files_plural', { count: uploadedFiles.length })
+              : t('upload')}
+        </Button>
+      </div>
+    </div>
+  </div>
   );
 }
