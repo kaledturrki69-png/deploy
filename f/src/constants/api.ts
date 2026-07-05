@@ -10,10 +10,10 @@ const API_V1_BASE = '/api/v1';
 
 export const API_ENDPOINTS = {
   // Documents
-  DOCUMENTS: `${API_V1_BASE}/documents/`,
-  DOCUMENT_DETAIL: (id: string | number) => `${API_V1_BASE}/documents/${id}/`,
+  DOCUMENTS: `${API_V1_BASE}/documents/documents/`,
+  DOCUMENT_DETAIL: (id: string | number) => `${API_V1_BASE}/documents/documents/${id}/`,
   DOCUMENT_DOWNLOAD: (id: string | number) =>
-    `${API_V1_BASE}/documents/${id}/download/`,
+    `${API_V1_BASE}/documents/documents/${id}/download/`,
 
   // Positions
   POSITIONS: `${API_V1_BASE}/positions/positions/`,
