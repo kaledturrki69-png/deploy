@@ -21,8 +21,19 @@ services:
         value: "text-embedding-004"
       - key: DEFAULT_LANGUAGE
         value: "fr"
-      # Set these manually in the Render dashboard:
-      # POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT
-      # OPENAI_API_KEY
-      # DJANGO_CORS_ALLOWED_ORIGINS (your Vercel frontend URL)
-      # FRONTEND_URL (your Vercel frontend URL)
+      - key: POSTGRES_HOST
+        value: "aws-0-eu-central-1.pooler.supabase.com"
+      - key: POSTGRES_PORT
+        value: "5432"
+      - key: POSTGRES_USER
+        value: "postgres.annmluavegijjaxsnvmh"
+      - key: POSTGRES_DB
+        value: "postgres"
+      - key: POSTGRES_PASSWORD
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        value: "https://deploy-ftj4.onrender.com"
+      - key: DJANGO_CORS_ALLOWED_ORIGINS
+        value: "https://deploy-ftj4.onrender.com"
