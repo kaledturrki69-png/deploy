@@ -23,7 +23,7 @@ export async function GET(
 
     const resolvedParams = await params;
     const id = resolvedParams.id;
-    const remoteUrl = `${REMOTE_API_BASE}/api/v1/documents/${id}/download/`;
+    const remoteUrl = `${REMOTE_API_BASE}/api/v1/documents/documents/${id}/download/`;
 
     const response = await fetch(remoteUrl, {
       method: 'GET',

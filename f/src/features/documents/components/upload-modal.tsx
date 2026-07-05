@@ -106,7 +106,7 @@ export function UploadModal({
       const formData = new FormData();
       uploadedFiles.forEach((file) => formData.append('files', file));
 
-      const response = await fetch(`${API_URL}/api/v1/documents/`, {
+      const response = await fetch(`${API_URL}/api/v1/documents/documents/`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${session.accessToken}` },
         body: formData

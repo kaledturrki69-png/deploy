@@ -29,7 +29,7 @@ export default async function ProductListingPage({}: ProductListingPage) {
     });
 
     const res = await fetch(
-      `${API_BASE}/api/v1/documents/?${params.toString()}`,
+      `${API_BASE}/api/v1/documents/documents/?${params.toString()}`,
       {
         headers: { Authorization: `Bearer ${token}` },
         cache: 'no-store'

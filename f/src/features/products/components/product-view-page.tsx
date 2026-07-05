@@ -22,7 +22,7 @@ export default async function ProductViewPage({
       const token = (session as any)?.accessToken;
 
       const res = await fetch(
-        `${API_BASE}/api/v1/documents/${productId}/`,
+        `${API_BASE}/api/v1/documents/documents/${productId}/`,
         {
           headers: { Authorization: `Bearer ${token}` },
           cache: 'no-store'
