@@ -193,7 +193,8 @@ export class DocumentService {
   }
 
   // Helper method to format file size
-  static formatFileSize(bytes: number): string {
+  static formatFileSize(bytes: number | null | undefined): string {
+    if (bytes == null || isNaN(bytes)) return '—';
     if (bytes === 0) return '0 Bytes';
 
     const k = 1024;

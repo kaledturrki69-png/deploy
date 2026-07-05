@@ -73,6 +73,7 @@ export const columns: ColumnDef<Document>[] = [
 
       const getSourceIcon = (source: string) => {
         switch (source.toLowerCase()) {
+          case 'upload':
           case 'web':
           case 'web_app':
             return '/assets/upload.svg';
@@ -89,6 +90,7 @@ export const columns: ColumnDef<Document>[] = [
 
       const getSourceLabel = (source: string) => {
         switch (source.toLowerCase()) {
+          case 'upload':
           case 'web':
           case 'web_app':
             return 'Web App';
