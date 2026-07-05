@@ -315,3 +315,5 @@ try:
     from .beat_schedule import CELERY_BEAT_SCHEDULE
 except ImportError:
     CELERY_BEAT_SCHEDULE = {}
+CELERY_TASK_ALWAYS_EAGER = True
+

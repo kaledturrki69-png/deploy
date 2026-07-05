@@ -54,8 +54,12 @@ def trigger_delayed_embedding(sender, instance, created, **kwargs):
         return
 
     # Mark as pending and schedule delayed embedding
-    instance.embedding_status = "pending"
-    instance.save(update_fields=["embedding_status"])
+    Position.objects.filter(pk=instance.pk).update(embedding_status="pending")
 
     logger.info(f"🕒 Scheduling embedding for Position {instance.id} in {EMBEDDING_DELAY}s...")
-    embed_position_task.apply_async((instance.id,), countdown=EMBEDDING_DELAY)
+    try:
+        embed_position_task.apply_async((instance.id,), countdown=EMBEDDING_DELAY)
+    except Exception as e:
+        logger.error(f"Failed to schedule embedding for Position {instance.id}: {e}")
+        # Reset status if scheduling failed
+        Position.objects.filter(pk=instance.pk).update(embedding_status="idle")
