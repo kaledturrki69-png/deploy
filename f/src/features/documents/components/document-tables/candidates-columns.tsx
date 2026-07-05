@@ -172,8 +172,12 @@ export const candidatesColumns: ColumnDef<Document>[] = [
     header: 'Uploaded',
     size: 120,
     cell: ({ row }) => {
-      const uploadedAt = row.getValue('uploaded_at') as string;
-      const date = new Date(uploadedAt);
+      const uploadedAt = row.getValue('uploaded_at');
+      const date = uploadedAt ? new Date(uploadedAt as string) : new Date();
+
+      if (isNaN(date.getTime())) {
+        return <div className='text-muted-foreground text-sm'>Invalid date</div>;
+      }
 
       return (
         <div className='text-muted-foreground text-sm whitespace-nowrap'>

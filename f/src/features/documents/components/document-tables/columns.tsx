@@ -173,8 +173,12 @@ export const columns: ColumnDef<Document>[] = [
     accessorKey: 'uploaded_at',
     header: 'Uploaded',
     cell: ({ row }) => {
-      const uploadedAt = row.getValue('uploaded_at') as string;
-      const date = new Date(uploadedAt);
+      const uploadedAt = row.getValue('uploaded_at');
+      const date = uploadedAt ? new Date(uploadedAt as string) : new Date();
+
+      if (isNaN(date.getTime())) {
+        return <div className='text-muted-foreground text-sm'>Invalid date</div>;
+      }
 
       // Use consistent formatting to avoid hydration mismatch
       const formatDate = (date: Date) => {
