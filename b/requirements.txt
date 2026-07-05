@@ -22,3 +22,5 @@ pydantic[email]
 pydantic-settings
 pgvector
 psycopg[binary]
+gunicorn
+whitenoise
