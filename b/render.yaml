@@ -24,11 +24,11 @@ services:
       - key: DEFAULT_LANGUAGE
         value: "fr"
       - key: POSTGRES_HOST
-        value: "aws-0-eu-central-1.pooler.supabase.com"
+        value: "db.annmluavegijjaxsnvmh.supabase.co"
       - key: POSTGRES_PORT
         value: "5432"
       - key: POSTGRES_USER
-        value: "postgres.annmluavegijjaxsnvmh"
+        value: "postgres"
       - key: POSTGRES_DB
         value: "postgres"
       - key: POSTGRES_PASSWORD
