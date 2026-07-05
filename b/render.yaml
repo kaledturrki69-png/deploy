@@ -2,6 +2,7 @@ services:
   - type: web
     name: jekjob-backend
     env: python
+    rootDir: b
     plan: free
     buildCommand: "./build.sh"
     startCommand: "gunicorn main.wsgi:application --bind 0.0.0.0:$PORT"
