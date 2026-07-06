@@ -4,7 +4,7 @@ import {
   createErrorResponse,
   handleApiError
 } from '@/lib/api-route-helpers';
-import { API_ENDPOINTS } from '@/constants/api';
+import { API_ENDPOINTS, API_BASE_URL } from '@/constants/api';
 
 // GET /api/documents
 export async function GET(request: NextRequest) {
@@ -125,12 +125,20 @@ export async function POST(request: NextRequest) {
 
     const token = authHeader.replace('Bearer ', '');
 
-    // Forward the full multipart stream to Django
-    const response = await fetchFromRemote(API_ENDPOINTS.DOCUMENTS, token, {
+    // Extract formData to preserve multipart boundaries
+    const formData = await request.formData();
+    const url = API_ENDPOINTS.DOCUMENTS.startsWith('http') 
+      ? API_ENDPOINTS.DOCUMENTS 
+      : `${API_BASE_URL}${API_ENDPOINTS.DOCUMENTS}`;
+
+    const response = await fetch(url, {
       method: 'POST',
-      body: request.body, // stream upload directly
-      duplex: 'half' as any // required in Node 18+
-    } as any);
+      headers: {
+        Authorization: `Bearer ${token}`
+        // Do NOT set Content-Type, native fetch will set it with the correct boundary
+      },
+      body: formData
+    });
 
     if (!response.ok) {
       return createErrorResponse(response);
