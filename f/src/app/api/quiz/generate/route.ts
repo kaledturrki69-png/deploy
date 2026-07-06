@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         template_id,
         candidate_id: payloadCandidateId,
+        recruiter_id: session.user.id,
         ...(question_count ? { question_count: Number(question_count) } : {})
       })
     });
