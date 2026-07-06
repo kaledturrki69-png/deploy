@@ -2,6 +2,7 @@ import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 // import { JWT } from 'next-auth/jwt';
 import { authService } from '@/services/auth-service';
+import { logger } from '@/lib/logger';
 
 // Define custom types to extend NextAuth's default types
 declare module 'next-auth' {
@@ -91,7 +92,7 @@ export const authOptions: NextAuthOptions = {
             refreshToken: response.refresh
           };
         } catch (error) {
-          console.error('AUTHORIZE ERROR:', error);
+          logger.error('AUTHORIZE ERROR', error as Error);
           return null;
         }
       }

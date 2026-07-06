@@ -1,4 +1,5 @@
 import apiClient from '@/lib/api-client';
+import { logger } from '@/lib/logger';
 
 export interface LoginCredentials {
   email: string;
@@ -37,7 +38,7 @@ export const authService = {
     });
     if (!response.ok) {
       const errText = await response.text();
-      console.error('Django API Error:', response.status, errText);
+      logger.error('Django API Error', new Error(`${response.status} ${errText}`));
       throw new Error(`Login failed: ${response.status} ${errText}`);
     }
     return response.json();
