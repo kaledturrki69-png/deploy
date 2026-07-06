@@ -22,7 +22,7 @@ export default async function Page(props: pageProps) {
   searchParamsCache.parse(searchParams);
 
   return (
-    <PageContainer scrollable={false}>
+    <PageContainer scrollable={true}>
       <PageWrapper locale={locale} />
     </PageContainer>
   );
