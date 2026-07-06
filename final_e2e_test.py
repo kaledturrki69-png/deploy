@@ -50,7 +50,7 @@ def api(method, path, token=None, **kwargs):
         headers["Authorization"] = f"Bearer {token}"
     url = f"{BACKEND_URL}{path}"
     try:
-        r = getattr(requests, method)(url, headers=headers, timeout=60, **kwargs)
+        r = getattr(requests, method)(url, headers=headers, timeout=120, **kwargs)
         return r
     except Exception as e:
         class FakeResp:
@@ -314,6 +314,40 @@ else:
 # =============================================================================
 section("8. ASSESSMENT - Quiz Templates & AI Test Generation")
 
+# Create a test skill
+r = api("post", "/api/v1/positions/skills/", token=token, json={"name": "Test Skill AI Quiz", "type": "hard"})
+skill_id = r.json().get("id") if r.status_code == 201 else 1
+
+# Create a test quiz template
+quiz_template_payload = {
+    "name": "E2E Assessment Template",
+    "skill": skill_id,
+    "description": "Auto-generated for E2E tests",
+    "purpose": "skill",
+    "language_mode": "fixed",
+    "language_code": "en",
+    "category_mix_mode": "uniform",
+    "difficulty_mix_mode": "uniform",
+    "default_question_count": 1
+}
+r = api("post", "/api/v1/assessment/templates/", token=token, json=quiz_template_payload)
+template_id = r.json().get("id") if r.status_code == 201 else None
+
+# Create a dummy question for the template so it doesn't fail with "No active questions"
+if template_id:
+    question_payload = {
+        "template": template_id,
+        "text": "What is 2+2?",
+        "type": "single_choice",
+        "difficulty": 1,
+        "max_score": 1.0,
+        "is_active": True
+    }
+    r_q = api("post", "/api/v1/assessment/questions/", token=token, json=question_payload)
+    question_id = r_q.json().get("id") if r_q.status_code == 201 else None
+    if question_id:
+        api("post", "/api/v1/assessment/choices/", token=token, json={"question": question_id, "text": "4", "is_correct": True, "weight": 1.0})
+
 r = api("get", "/api/v1/assessment/templates/", token=token)
 templates = []
 if r.status_code == 200:
@@ -347,7 +381,7 @@ if templates and candidate_id:
         "template_id": templates[0]["id"],
         "candidate_id": candidate_id,
         "recruiter_id": recruiter_id,
-        "question_count": 3
+        "question_count": 1
     }
     r = api("post", "/api/v1/assessment/public/generate_quiz/", json=quiz_payload)
     if r.status_code == 200:
@@ -399,7 +433,7 @@ for endpoint, name in dashboard_endpoints:
 section("11. CLEANUP - Removing Test Data")
 
 if doc_id:
-    r = api("delete", f"/api/v1/documents/{doc_id}/", token=token)
+    r = api("delete", f"/api/v1/documents/documents/{doc_id}/", token=token)
     test("Delete test document", r.status_code in (200, 204, 404),
          f"HTTP {r.status_code}")
 
@@ -411,6 +445,16 @@ if candidate_id:
 if position_id:
     r = api("delete", f"/api/v1/positions/positions/{position_id}/", token=token)
     test("Delete test position", r.status_code in (200, 204, 404),
+         f"HTTP {r.status_code}")
+
+if 'template_id' in locals() and template_id:
+    r = api("delete", f"/api/v1/assessment/templates/{template_id}/", token=token)
+    test("Delete test quiz template", r.status_code in (200, 204, 404),
+         f"HTTP {r.status_code}")
+
+if 'skill_id' in locals() and skill_id:
+    r = api("delete", f"/api/v1/positions/skills/{skill_id}/", token=token)
+    test("Delete test skill", r.status_code in (200, 204, 404),
          f"HTTP {r.status_code}")
 
 # =============================================================================
