@@ -25,7 +25,13 @@ def trigger_delayed_embedding(sender, instance, created, **kwargs):
       - Already embedded positions (embedding_status='done')
       - Pending embeddings
       - Positions with no meaningful text
+      - Updates that only change embedding fields
     """
+    if kwargs.get('update_fields'):
+        fields = set(kwargs['update_fields'])
+        # If we are only updating embedding fields, skip to prevent infinite loops
+        if fields.issubset({'embedding_status', 'embedding', 'last_embedding_at'}):
+            return
 
     # Skip if currently embedding
     if instance.embedding_status == "pending":
@@ -56,7 +62,7 @@ def trigger_delayed_embedding(sender, instance, created, **kwargs):
     # Mark as pending and schedule delayed embedding
     Position.objects.filter(pk=instance.pk).update(embedding_status="pending")
 
-    logger.info(f"🕒 Scheduling embedding for Position {instance.id} in {EMBEDDING_DELAY}s...")
+    logger.info(f"Scheduling embedding for Position {instance.id} in {EMBEDDING_DELAY}s...")
     try:
         embed_position_task.apply_async((instance.id,), countdown=EMBEDDING_DELAY)
     except Exception as e:

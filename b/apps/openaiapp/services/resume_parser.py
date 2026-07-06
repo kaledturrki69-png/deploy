@@ -1,5 +1,6 @@
 import json
 import re
+import os
 from pathlib import Path
 from json import JSONDecodeError
 from django.conf import settings
@@ -55,18 +56,20 @@ def parse_resume_text(resume_text: str, schema_version: str = DEFAULT_SCHEMA_VER
         print("********************")
         print(resume_text[:200])
         print("********************")
+        model_name = os.getenv("OPENAI_CHAT_MODEL", "gemini-1.5-flash")
         # ✅ Use Responses API with schema-guided parsing
-        response = client.responses.parse(
-            model="gpt-4o-2024-08-06",
-            input=[
+        completion = client.beta.chat.completions.parse(
+            model=model_name,
+            messages=[
                 {"role": "system", "content": "You are a professional multilingual résumé and curriculum vitae parser. Extract structured candidate profile information."},
                 {"role": "user", "content": resume_text},
             ],
-            text_format=CandidateProfile,  # ← the schema defines the expected structure
+            response_format=CandidateProfile,  # ← the schema defines the expected structure
         )
 
         # Try to get structured result
-        parsed  = response.output_parsed
+        # Because we return a dict from this function to match the rest of the app:
+        parsed = completion.choices[0].message.parsed.model_dump()
         return parsed
     except Exception as e:
         return {"error": str(e)}

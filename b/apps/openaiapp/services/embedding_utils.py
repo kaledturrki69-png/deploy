@@ -2,6 +2,7 @@
 from openai import OpenAI
 from django.conf import settings
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -19,8 +20,9 @@ def get_embedding(text: str, model: str = "text-embedding-3-small") -> list[floa
 
     client = get_openai_client()
     try:
+        model = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
         response = client.embeddings.create(model=model, input=text)
         return response.data[0].embedding
     except Exception as e:
-        logger.exception(f"⚠️ Failed to embed text ({len(text)} chars): {e}")
+        logger.exception(f"Failed to embed text ({len(text)} chars): {e}")
         return []

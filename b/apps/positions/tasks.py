@@ -16,12 +16,12 @@ def embed_position_task(self, position_id: int):
     try:
         position = Position.objects.get(pk=position_id)
     except Position.DoesNotExist:
-        logger.warning(f"⚠️ Position {position_id} not found.")
+        logger.warning(f"Position {position_id} not found.")
         return
 
     # If already done or manually canceled
     if position.embedding_status == "done":
-        logger.info(f"ℹ️ Position {position.id} already embedded.")
+        logger.info(f"Position {position.id} already embedded.")
         return
 
     # Build embedding text
@@ -39,7 +39,7 @@ def embed_position_task(self, position_id: int):
 
     vector = get_embedding(text)
     if not vector:
-        logger.error(f"❌ Failed to embed position {position.id}")
+        logger.error(f"Failed to embed position {position.id}")
         position.embedding_status = "idle"
         position.save(update_fields=["embedding_status"])
         return
@@ -49,4 +49,4 @@ def embed_position_task(self, position_id: int):
     position.embedding_status = "done"
     position.last_embedding_at = timezone.now()
     position.save(update_fields=["embedding", "embedding_status", "last_embedding_at"])
-    logger.info(f"✅ Embedded position {position.id} successfully.")
+    logger.info(f"Embedded position {position.id} successfully.")

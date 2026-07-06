@@ -91,11 +91,8 @@ def process_document(self, document_id: int):
             try:
                 resume_text_for_embedding = " ".join([
                     parsed.name or "",
-                    " ".join(getattr(parsed, "skills", []) or []),
-                    " ".join(
-                        str(exp) for exp in (getattr(parsed, "experience", []) or [])
-                    ),
-                    getattr(parsed, "summary", "") or "",
+                    " ".join(str(exp) for exp in (getattr(parsed, "experience", []) or [])),
+                    " ".join(str(s) for s in (getattr(parsed, "summary", []) or [])),
                 ]).strip()
                 if resume_text_for_embedding:
                     embedding = get_embedding(resume_text_for_embedding)

@@ -37,4 +37,4 @@ def embed_resume_task(resume_id: int):
         resume.save(update_fields=["embedding"])
         logger.info(f"✅ Embedded resume {resume.id} successfully ({len(vector)} dims).")
     else:
-        logger.warning(f"⚠️ Resume {resume.id} embedding failed.")
+        logger.warning(f"Resume {resume.id} embedding failed.")
